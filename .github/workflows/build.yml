@@ -1,25 +1,28 @@
-# A simple action usage
-name: Build Kernel
+name: Build Oppo A15s Kernel
+
 on:
-  workflow_dispatch:
+workflow_dispatch:
 
 jobs:
-  Build-Kernel:
-    strategy:
-      fail-fast: false
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
+build:
+runs-on: ubuntu-22.04
+steps:
+- name: Checkout Repository
+uses: actions/checkout@v4
 
-    steps:
-      - name: Build Kernel
-        uses: cyberc3dr/nGKI_Kernel_Build@rebase
-        with:
-          KERNEL_SOURCE: https://github.com/amirfoysal720-dotcom/A15.git
-          KERNEL_SOURCE_BRANCH: 'main'
-          KERNEL_CONFIG: 'oppo6765_defconfig'
-          ARCH: 'arm64'
-          ENABLE_KERNELSU: true
-          KERNELSU_TAG: 'next'
-          ENABLE_KSU_LKM: false
-          ENABLE_KSU_SUSFS: true
+- name: Install Build Dependencies
+run: |
+sudo apt-get update
+sudo apt-get install -y bc build-essential libncurses5-dev libssl-dev bison flex libelf-dev clang lld llvm
+
+- name: Clone Toolchain & Source
+run: |
+git clone --depth=1 https://github.com/amirfoysal720-dotcom/A15.git -b main android-kernel
+git clone --depth=1 https://googlesource.com -b android11-release clang-toolchain
+
+- name: Build Kernel
+run: |
+export PATH=$(pwd)/clang-toolchain/clang-r383902/bin:$PATH
+cd android-kernel/kernel-4.9
+make O=out ARCH=arm64 oppo6765_defconfig
+make -j$(nproc) O=out ARCH=arm64 CC=clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=aarch64-linux-androidkernel-
