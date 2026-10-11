@@ -15,8 +15,8 @@ jobs:
       - name: Build Kernel
         uses: dabao1955/kernel_build_action@main
         with:
-          kernel-url: ${{ github.event.inputs.kernel-url }}
-          kernel-dir: ${{ github.event.inputs.kernel-dir }}
+          kernel-url: https://github.com/amirfoysal720-dotcom/A15.git
+          kernel-dir: A15/kernel-4.9
           kernel-branch: main
           config: oppo6765_defconfig
           arch: arm64
