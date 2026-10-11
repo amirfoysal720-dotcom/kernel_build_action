@@ -16,7 +16,7 @@ jobs:
         uses: dabao1955/kernel_build_action@main
         with:
           kernel-url: https://github.com/oppo-source/A15
-          kernel-dir: kernel-4.9
+          kernel-dir: .
           kernel-branch: main
           config: oppo6765_defconfig
           arch: arm64
