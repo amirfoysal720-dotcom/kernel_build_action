@@ -13,18 +13,13 @@ jobs:
 
     steps:
       - name: Build Kernel
-        uses: dabao1955/kernel_build_action@main
+        uses: cyberc3dr/nGKI_Kernel_Build@rebase
         with:
-          kernel-url: https://github.com/amirfoysal720-dotcom/A15.git
-          kernel-dir: kernel A15/kernel-4.9
-          kernel-branch: main
-          config: oppo6765_defconfig
-          arch: arm64
-          aosp-gcc: true
-          aosp-clang: true
-          ksu: true
-          ksu-version: next
-          android-version: 11
-          aosp-clang-version: r383902
-          disable-lto: true
-          anykernel3: true
+          KERNEL_SOURCE: 'https://github.com'
+          KERNEL_SOURCE_BRANCH: 'main'
+          KERNEL_CONFIG: 'oppo6765_defconfig'
+          ARCH: 'arm64'
+          ENABLE_KERNELSU: true
+          KERNELSU_TAG: 'next'
+          ENABLE_KSU_LKM: false
+          ENABLE_KSU_SUSFS: true
