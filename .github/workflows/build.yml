@@ -15,7 +15,7 @@ jobs:
       - name: Build Kernel
         uses: cyberc3dr/nGKI_Kernel_Build@rebase
         with:
-          KERNEL_SOURCE: 'https://github.com/amirfoysal720-dotcom/A15.git'
+          KERNEL_SOURCE: https://github.com/amirfoysal720-dotcom/A15.git
           KERNEL_SOURCE_BRANCH: 'main'
           KERNEL_CONFIG: 'oppo6765_defconfig'
           ARCH: 'arm64'
